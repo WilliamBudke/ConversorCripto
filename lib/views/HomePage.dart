@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
     return Padding(
       padding: const EdgeInsets.only(top: 20.0),
       child: RaisedButton(
-        onPressed: _searchCep,
+        onPressed: _searchCripto,
         child: _loading ? _circularLoading() : Text('Consultar'),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),),
         color: Colors.yellow,
@@ -165,7 +165,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future _searchCep() async {
+  Future _searchCripto() async {
     _searching(true);
 
       final criptoValor = _searchCriptoController.text;
@@ -173,7 +173,7 @@ class _HomePageState extends State<HomePage> {
       final resultCripto = await ViaCriptoService.fetchCripto(cripto : cripto);
 
       setState(() {
-        _result =
+        _result = resultCripto.toJson();
       });
 
       _searching(false);
