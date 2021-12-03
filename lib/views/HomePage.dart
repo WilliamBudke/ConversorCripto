@@ -1,3 +1,5 @@
+import 'package:conversorcripto/models/result_cripto.dart';
+import 'package:conversorcripto/models/result_cripto.dart';
 import 'package:conversorcripto/services/via_cripto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -167,14 +169,16 @@ class _HomePageState extends State<HomePage> {
 
   Future _searchCripto() async {
     _searching(true);
-
+      double aux;
       final criptoValor = _searchCriptoController.text;
       final cripto= _selectedCripto;
       final resultCripto = await ViaCriptoService.fetchCripto(cripto : cripto);
 
-      setState(() {
-        _result = resultCripto.toJson();
-      });
+        setState(() {
+            aux = double.parse(resultCripto.ticker.sell) as double;
+            aux = double.parse(criptoValor) / aux;
+            _result = aux.toString();
+        });
 
       _searching(false);
   }
